@@ -1,0 +1,186 @@
+IF:
+
+Clock:0
+OF:
+
+Instruction code:10110000000010000000000000000000
+Opcode:10110
+rs1:0
+rs2:4
+rd:4
+MAA ka loda      instruction set
+IF:
+
+Clock:1
+EX:
+
+Instruction code:-1341652992
+Opcode:10110
+rs1:0
+rs2:4
+rd:4
+OPCODE:10110
+
+alures:0
+
+imm:0
+
+OF:
+
+Instruction code:00111001000010100000000000000010
+Opcode:00111
+rs1:4
+rs2:5
+rd:5
+PPPPPPPPP10110
+^^^^^^^^^^^^^00100
+^^^^^^^^^^^^^00100
+^^^^^^^^^^^^^^^^^^^^^00100
+*********EX4***********
+IF:
+
+Clock:2
+MA:
+
+Instruction code:-1341652992
+Opcode:10110
+rs1:0
+rs2:4
+rd:4
+OF:
+
+Instruction code:00111001000010100000000000000010
+Opcode:00111
+rs1:4
+rs2:5
+rd:5
+PPPPPPPPP111111
+*********MA***********
+IF:
+
+Clock:3
+RW:
+
+Instruction code:-1341652992
+Opcode:10110
+rs1:0
+rs2:4
+rd:4
+rd = 4
+
+result = 10
+
+OF:
+
+Instruction code:00111001000010100000000000000010
+Opcode:00111
+rs1:4
+rs2:5
+rd:5
+PPPPPPPPP111111
+MAA ka loda      instruction set
+IF:
+
+Clock:4
+EX:
+
+Instruction code:956956674
+Opcode:00111
+rs1:4
+rs2:5
+rd:5
+OPCODE:00111
+
+alures:5
+
+imm:2
+
+OF:
+
+Instruction code:00001001010010100000000000000010
+Opcode:00001
+rs1:5
+rs2:5
+rd:5
+PPPPPPPPP00111
+BEHEN KA LODA
+*********EX3***********
+IF:
+
+Clock:5
+
+Register File Contents:
+
+PC	: 4
+
+x0	: 0
+x1	: 65535
+x2	: 65535
+x3	: 0
+x4	: 10
+x5	: 0
+x6	: 0
+x7	: 0
+x8	: 0
+x9	: 0
+x10	: 0
+x11	: 0
+x12	: 0
+x13	: 0
+x14	: 0
+x15	: 0
+x16	: 0
+x17	: 0
+x18	: 0
+x19	: 0
+x20	: 0
+x21	: 0
+x22	: 0
+x23	: 0
+x24	: 0
+x25	: 0
+x26	: 0
+x27	: 0
+x28	: 0
+x29	: 0
+x30	: 0
+x31	: 0
+
+
+
+Main Memory Contents:
+
+0		: 10
+1		: -1341652992
+2		: 956956674
+3		: 155844610
+4		: -402653184
+5		: 0
+6		: 0
+7		: 0
+8		: 0
+9		: 0
+10		: 0
+11		: 0
+12		: 0
+13		: 0
+14		: 0
+15		: 0
+16		: 0
+17		: 0
+18		: 0
+19		: 0
+20		: 0
+21		: 0
+22		: 0
+23		: 0
+24		: 0
+25		: 0
+26		: 0
+27		: 0
+28		: 0
+29		: 0
+30		: 0
+
+
+Hash of the Processor State = 1417707759
