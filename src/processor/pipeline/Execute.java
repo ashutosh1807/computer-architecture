@@ -122,11 +122,11 @@ public class Execute {
 
 		}
 		else {
-			controlunit.opcode="111111";
-			controlunit.rs1="111111";
-			controlunit.rs2="111111";
-			controlunit.rd="111111";
-			controlunit.Imm = "111111111111111111111111111111111111";
+			controlunit.opcode="";
+			controlunit.rs1="";
+			controlunit.rs2="";
+			controlunit.rd="";
+			controlunit.Imm = "";
 		}
 		
 	}

@@ -54,7 +54,7 @@ Opcode:00111
 rs1:4
 rs2:5
 rd:5
-PPPPPPPPP111111
+PPPPPPPPP
 *********MA***********
 IF:
 
@@ -77,7 +77,7 @@ Opcode:00111
 rs1:4
 rs2:5
 rd:5
-PPPPPPPPP111111
+PPPPPPPPP
 MAA ka loda      instruction set
 IF:
 
