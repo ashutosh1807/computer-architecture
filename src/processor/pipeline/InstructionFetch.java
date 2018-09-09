@@ -10,7 +10,8 @@ public class InstructionFetch {
 	IF_EnableLatchType IF_EnableLatch;
 	IF_OF_LatchType IF_OF_Latch;
 	EX_IF_LatchType EX_IF_Latch;
-	boolean conflict = true;
+	boolean conflict = false;
+	boolean is_end = false;
 	
 	public InstructionFetch(Processor containingProcessor, IF_EnableLatchType iF_EnableLatch, IF_OF_LatchType iF_OF_Latch, EX_IF_LatchType eX_IF_Latch)
 	{
@@ -22,7 +23,7 @@ public class InstructionFetch {
 	
 	public void performIF()
 	{
-			if(IF_EnableLatch.isIF_enable())
+			if(IF_EnableLatch.isIF_enable() && !is_end)
 			{
 				System.out.println("IF:"+"\n");
 				if(EX_IF_Latch.IF_enable){
@@ -43,18 +44,34 @@ public class InstructionFetch {
 					todo = todo + "0" ;
 				}
 				instructionString = todo + instructionString;
+				
+				if(!conflict) {
+					if(instructionString.substring(0,5).equals("11101")) {
+						is_end = true;
+					}
+					IF_OF_Latch.setInstruction(newInstruction);
+					containingProcessor.getRegisterFile().setProgramCounter(currentPC + 1);
+
+				}
+				
+				/*
 				if(!(instructionString.substring(0,5).equals("11101")) ){
 					if(conflict) {	// checking conflicts
 						IF_OF_Latch.setInstruction(newInstruction);
 						containingProcessor.getRegisterFile().setProgramCounter(currentPC + 1);
 					}
-					//IF_EnableLatch.setIF_enable(false);
-					IF_OF_Latch.setOF_enable(true);
 				}
-				else {
-					IF_EnableLatch.setIF_enable(false);
-					Simulator.setSimulationComplete(true);
+				else if(!conflict ) {
+					is_end = true;
+					System.out.println("ppppppppppppppppppppppppppppppp");
+					//Simulator.setSimulationComplete(true);
 				}
+				*/
+				
+				
+				
+				IF_EnableLatch.setIF_enable(false);
+				IF_OF_Latch.setOF_enable(true);
 			}
 	}
 

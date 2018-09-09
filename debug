@@ -3,22 +3,22 @@ IF:
 Clock:0
 OF:
 
-Instruction code:10110000000010000000000000000000
+Instruction code:10110000000001100000000000000000
 Opcode:10110
 rs1:0
-rs2:4
-rd:4
+rs2:3
+rd:3
 MAA ka loda      instruction set
 IF:
 
 Clock:1
 EX:
 
-Instruction code:-1341652992
+Instruction code:-1341784064
 Opcode:10110
 rs1:0
-rs2:4
-rd:4
+rs2:3
+rd:3
 OPCODE:10110
 
 alures:0
@@ -27,103 +27,693 @@ imm:0
 
 OF:
 
-Instruction code:00111001000010100000000000000010
-Opcode:00111
-rs1:4
-rs2:5
-rd:5
-PPPPPPPPP10110
-^^^^^^^^^^^^^00100
-^^^^^^^^^^^^^00100
-^^^^^^^^^^^^^^^^^^^^^00100
-*********EX4***********
+Instruction code:00010001110011100111000000000000
+Opcode:00010
+rs1:7
+rs2:7
+rd:7
+*********EX2***********
+MAA ka loda      instruction set
 IF:
 
 Clock:2
 MA:
 
-Instruction code:-1341652992
+Instruction code:-1341784064
 Opcode:10110
 rs1:0
-rs2:4
-rd:4
+rs2:3
+rd:3
+EX:
+
+Instruction code:298741760
+Opcode:00010
+rs1:7
+rs2:7
+rd:7
+OPCODE:00010
+
+alures:0
+
 OF:
 
-Instruction code:00111001000010100000000000000010
+Instruction code:00111000110010000000000000001010
 Opcode:00111
-rs1:4
-rs2:5
-rd:5
-PPPPPPPPP
-*********MA***********
+rs1:3
+rs2:4
+rd:4
+PPPPPPPPP00010
+BEHEN KA LODA
+*********EX3***********
+*********MA4***********
+))))))))))))))))))))))))))))))
 IF:
 
 Clock:3
 RW:
 
-Instruction code:-1341652992
+Instruction code:-1341784064
 Opcode:10110
 rs1:0
-rs2:4
-rd:4
-rd = 4
+rs2:3
+rd:3
+rd = 3
 
-result = 10
+result = 1
 
+MA:
+
+Instruction code:298741760
+Opcode:00010
+rs1:7
+rs2:7
+rd:7
 OF:
 
-Instruction code:00111001000010100000000000000010
+Instruction code:00111000110010000000000000001010
 Opcode:00111
-rs1:4
-rs2:5
-rd:5
+rs1:3
+rs2:4
+rd:4
 PPPPPPPPP
+*********MA3***********
 MAA ka loda      instruction set
 IF:
 
 Clock:4
+RW:
+
+Instruction code:298741760
+Opcode:00010
+rs1:7
+rs2:7
+rd:7
+rd = 7
+
+result = 0
+
 EX:
 
-Instruction code:956956674
+Instruction code:952631306
 Opcode:00111
-rs1:4
-rs2:5
-rd:5
+rs1:3
+rs2:4
+rd:4
 OPCODE:00111
 
-alures:5
+alures:0
 
-imm:2
+imm:10
 
 OF:
 
-Instruction code:00001001010010100000000000000010
+Instruction code:00001111111111000000000000000000
 Opcode:00001
-rs1:5
-rs2:5
-rd:5
+rs1:31
+rs2:30
+rd:30
 PPPPPPPPP00111
 BEHEN KA LODA
 *********EX3***********
+*********RW2***********
+))))))))))))))))))))))))))))))
 IF:
 
 Clock:5
+MA:
+
+Instruction code:952631306
+Opcode:00111
+rs1:3
+rs2:4
+rd:4
+OF:
+
+Instruction code:00001111111111000000000000000000
+Opcode:00001
+rs1:31
+rs2:30
+rd:30
+PPPPPPPPP
+*********MA3***********
+MAA ka loda      instruction set
+IF:
+
+Clock:6
+RW:
+
+Instruction code:952631306
+Opcode:00111
+rs1:3
+rs2:4
+rd:4
+rd = 4
+
+result = 0
+
+EX:
+
+Instruction code:268173312
+Opcode:00001
+rs1:31
+rs2:30
+rd:30
+OPCODE:00001
+
+alures:1
+
+imm:0
+
+OF:
+
+Instruction code:00101001110011100000000000001010
+Opcode:00101
+rs1:7
+rs2:7
+rd:7
+PPPPPPPPP00001
+BEHEN KA LODA
+*********EX3***********
+*********RW2***********
+MAA ka loda      instruction set
+IF:
+
+Clock:7
+MA:
+
+Instruction code:268173312
+Opcode:00001
+rs1:31
+rs2:30
+rd:30
+EX:
+
+Instruction code:701366282
+Opcode:00101
+rs1:7
+rs2:7
+rd:7
+OPCODE:00101
+
+alures:0
+
+imm:10
+
+OF:
+
+Instruction code:00000001111111000111000000000000
+Opcode:00000
+rs1:7
+rs2:30
+rd:7
+*********EX1***********
+*********MA1***********
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:8
+RW:
+
+Instruction code:268173312
+Opcode:00001
+rs1:31
+rs2:30
+rd:30
+rd = 30
+
+result = 1
+
+MA:
+
+Instruction code:701366282
+Opcode:00101
+rs1:7
+rs2:7
+rd:7
+OF:
+
+Instruction code:00000001111111000111000000000000
+Opcode:00000
+rs1:7
+rs2:30
+rd:7
+*********MA1***********
+*********RW1***********true
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:9
+RW:
+
+Instruction code:701366282
+Opcode:00101
+rs1:7
+rs2:7
+rd:7
+rd = 7
+
+result = 0
+
+OF:
+
+Instruction code:00000001111111000111000000000000
+Opcode:00000
+rs1:7
+rs2:30
+rd:7
+*********RW1***********true
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:10
+OF:
+
+Instruction code:00000001111111000111000000000000
+Opcode:00000
+rs1:7
+rs2:30
+rd:7
+MAA ka loda      instruction set
+IF:
+
+Clock:11
+EX:
+
+Instruction code:33320960
+Opcode:00000
+rs1:7
+rs2:30
+rd:7
+OPCODE:00000
+
+alures:1
+
+OF:
+
+Instruction code:00111000110001100000000000001010
+Opcode:00111
+rs1:3
+rs2:3
+rd:3
+PPPPPPPPP00000
+BEHEN KA LODA
+*********EX3***********
+MAA ka loda      instruction set
+IF:
+
+Clock:12
+MA:
+
+Instruction code:33320960
+Opcode:00000
+rs1:7
+rs2:30
+rd:7
+EX:
+
+Instruction code:952500234
+Opcode:00111
+rs1:3
+rs2:3
+rd:3
+OPCODE:00111
+
+alures:0
+
+imm:10
+
+OF:
+
+Instruction code:11100000110000011111111111111011
+Opcode:11100
+rs1:3
+rs2:0
+rd:0
+BEHENCHODA
+*********EX5***********
+*********MA5***********true
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:13
+RW:
+
+Instruction code:33320960
+Opcode:00000
+rs1:7
+rs2:30
+rd:7
+rd = 7
+
+result = 1
+
+MA:
+
+Instruction code:952500234
+Opcode:00111
+rs1:3
+rs2:3
+rd:3
+OF:
+
+Instruction code:11100000110000011111111111111011
+Opcode:11100
+rs1:3
+rs2:0
+rd:0
+BEHENCHODA
+*********MA5***********true
+*********RW3***********true
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:14
+RW:
+
+Instruction code:952500234
+Opcode:00111
+rs1:3
+rs2:3
+rd:3
+rd = 3
+
+result = 0
+
+OF:
+
+Instruction code:11100000110000011111111111111011
+Opcode:11100
+rs1:3
+rs2:0
+rd:0
+BEHENCHODA
+*********RW3***********true
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:15
+OF:
+
+Instruction code:11100000110000011111111111111011
+Opcode:11100
+rs1:3
+rs2:0
+rd:0
+BEHENCHODA
+MAA ka loda      instruction set
+IF:
+
+Clock:16
+EX:
+
+Instruction code:-524156933
+Opcode:11100
+rs1:3
+rs2:0
+rd:0
+OPCODE:11100
+
+----------------------------0
+----------------------------0
+isbrannchtaken:0
+
+branch target:0
+
+OF:
+
+Instruction code:10110000000010100000000000000000
+Opcode:10110
+rs1:0
+rs2:5
+rd:5
+MAA ka loda      instruction set
+IF:
+
+Clock:17
+EX:
+
+Instruction code:-1341521920
+Opcode:10110
+rs1:0
+rs2:5
+rd:5
+OPCODE:10110
+
+alures:0
+
+imm:0
+
+OF:
+
+Instruction code:11001001010011100000000000000100
+Opcode:11001
+rs1:5
+rs2:7
+rd:7
+BEHENCHODA
+*********EX6***********
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:18
+MA:
+
+Instruction code:-1341521920
+Opcode:10110
+rs1:0
+rs2:5
+rd:5
+OF:
+
+Instruction code:11001001010011100000000000000100
+Opcode:11001
+rs1:5
+rs2:7
+rd:7
+BEHENCHODA
+*********MA6***********true
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:19
+RW:
+
+Instruction code:-1341521920
+Opcode:10110
+rs1:0
+rs2:5
+rd:5
+rd = 5
+
+result = 1
+
+OF:
+
+Instruction code:11001001010011100000000000000100
+Opcode:11001
+rs1:5
+rs2:7
+rd:7
+BEHENCHODA
+MAA ka loda      instruction set
+IF:
+
+Clock:20
+EX:
+
+Instruction code:-917635068
+Opcode:11001
+rs1:5
+rs2:7
+rd:7
+OPCODE:11001
+
+----------------------------1
+----------------------------1
+----------------------------1
+----------------------------1
+isbrannchtaken:1
+
+branch target:14
+
+IF:
+
+Clock:22
+OF:
+
+Instruction code:00010010100101001010000000000000
+Opcode:00010
+rs1:10
+rs2:10
+rd:10
+MAA ka loda      instruction set
+IF:
+
+Clock:23
+EX:
+
+Instruction code:311730176
+Opcode:00010
+rs1:10
+rs2:10
+rd:10
+OPCODE:00010
+
+alures:0
+
+OF:
+
+Instruction code:00001010100101000000000000000001
+Opcode:00001
+rs1:10
+rs2:10
+rd:10
+PPPPPPPPP00010
+BEHEN KA LODA
+*********EX3***********
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:24
+MA:
+
+Instruction code:311730176
+Opcode:00010
+rs1:10
+rs2:10
+rd:10
+OF:
+
+Instruction code:00001010100101000000000000000001
+Opcode:00001
+rs1:10
+rs2:10
+rd:10
+PPPPPPPPP
+*********MA3***********
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:25
+RW:
+
+Instruction code:311730176
+Opcode:00010
+rs1:10
+rs2:10
+rd:10
+rd = 10
+
+result = 0
+
+OF:
+
+Instruction code:00001010100101000000000000000001
+Opcode:00001
+rs1:10
+rs2:10
+rd:10
+PPPPPPPPP
+*********RW2***********
+))))))))))))))))))))))))))))))
+IF:
+
+Clock:26
+OF:
+
+Instruction code:00001010100101000000000000000001
+Opcode:00001
+rs1:10
+rs2:10
+rd:10
+PPPPPPPPP
+MAA ka loda      instruction set
+IF:
+
+Clock:27
+EX:
+
+Instruction code:177471489
+Opcode:00001
+rs1:10
+rs2:10
+rd:10
+OPCODE:00001
+
+alures:1
+
+imm:1
+
+OF:
+
+Instruction code:11101000000000000000000000000000
+Opcode:11101
+rs1:0
+rs2:0
+rd:0
+pppppppppppppppppppppppppppp123
+MAA ka loda      instruction set
+MA:
+
+Instruction code:177471489
+Opcode:00001
+rs1:10
+rs2:10
+rd:10
+EX:
+
+Instruction code:-402653184
+Opcode:11101
+rs1:0
+rs2:0
+rd:0
+OPCODE:11101
+
+alures:0
+
+imm:0
+
+RW:
+
+Instruction code:177471489
+Opcode:00001
+rs1:10
+rs2:10
+rd:10
+rd = 10
+
+result = 1
+
+MA:
+
+Instruction code:-402653184
+Opcode:11101
+rs1:0
+rs2:0
+rd:0
+RW:
+
+Instruction code:-402653184
+Opcode:11101
+rs1:0
+rs2:0
+rd:0
 
 Register File Contents:
 
-PC	: 4
+PC	: 17
 
 x0	: 0
 x1	: 65535
 x2	: 65535
 x3	: 0
-x4	: 10
-x5	: 0
+x4	: 0
+x5	: 1
 x6	: 0
-x7	: 0
+x7	: 1
 x8	: 0
 x9	: 0
-x10	: 0
+x10	: 1
 x11	: 0
 x12	: 0
 x13	: 0
@@ -143,30 +733,30 @@ x26	: 0
 x27	: 0
 x28	: 0
 x29	: 0
-x30	: 0
-x31	: 0
+x30	: 1
+x31	: 1
 
 
 
 Main Memory Contents:
 
-0		: 10
-1		: -1341652992
-2		: 956956674
-3		: 155844610
-4		: -402653184
-5		: 0
-6		: 0
-7		: 0
-8		: 0
-9		: 0
-10		: 0
-11		: 0
-12		: 0
-13		: 0
-14		: 0
-15		: 0
-16		: 0
+0		: 1
+1		: -1341784064
+2		: 298741760
+3		: 952631306
+4		: 268173312
+5		: 701366282
+6		: 33320960
+7		: 952500234
+8		: -524156933
+9		: -1341521920
+10		: -917635068
+11		: 311730176
+12		: 445906945
+13		: -402653184
+14		: 311730176
+15		: 177471489
+16		: -402653184
 17		: 0
 18		: 0
 19		: 0
@@ -183,4 +773,4 @@ Main Memory Contents:
 30		: 0
 
 
-Hash of the Processor State = 1417707759
+Hash of the Processor State = 1554327503

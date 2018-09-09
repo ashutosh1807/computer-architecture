@@ -19,7 +19,6 @@ public class Processor {
 	
 	RegisterFile registerFile;
 	MainMemory mainMemory;
-	control_unit controlUnit;
 	
 	IF_EnableLatchType IF_EnableLatch;
 	IF_OF_LatchType IF_OF_Latch;
@@ -38,7 +37,7 @@ public class Processor {
 	{
 		registerFile = new RegisterFile();
 		mainMemory = new MainMemory();
-		controlUnit = new control_unit() ;
+		//controlUnit = new control_unit() ;
 		
 		IF_EnableLatch = new IF_EnableLatchType();
 		IF_OF_Latch = new IF_OF_LatchType();
@@ -77,13 +76,7 @@ public class Processor {
 		this.mainMemory = mainMemory;
 	}
 	
-	public control_unit getcontrol_unit() {
-		return controlUnit;
-	}
-
-	public void setcontrol_unit(control_unit controlunit) {
-		this.controlUnit = controlunit;
-	}
+	
 
 	public InstructionFetch getIFUnit() {
 		return IFUnit;

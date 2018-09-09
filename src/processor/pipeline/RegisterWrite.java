@@ -28,30 +28,36 @@ public class RegisterWrite {
 			System.out.print("rs1:"+Integer.parseInt(controlunit.rs1,2)+"\n");
 			System.out.print("rs2:"+Integer.parseInt(controlunit.rs2,2)+"\n");
 			System.out.print("rd:"+Integer.parseInt(controlunit.rd,2)+"\n");
-
-			//TODO
-			// if instruction being processed is an end instruction, remember to call Simulator.setSimulationComplete(true);
-			int result;
-			if (containingProcessor.getcontrol_unit().isLd()){
-				result = MA_RW_Latch.getldres();
-			}
-			else{
-				result = MA_RW_Latch.getalures();
-			}
-			int rd = MA_RW_Latch.getrd();
-			System.out.println("rd = "+ rd+"\n");
-			System.out.println("result = "+ result+"\n");
-
-			if(containingProcessor.getcontrol_unit().isWb()){
-				containingProcessor.getRegisterFile().setValue(rd, result);
-			}
-			
-			MA_RW_Latch.setRW_enable(false);
-			IF_EnableLatch.setIF_enable(true);
-			
-			if(containingProcessor.getcontrol_unit().isend()){
+			if(controlunit.opcode.equals("11101")){
 				Simulator.setSimulationComplete(true);
+				MA_RW_Latch.setRW_enable(false);
 				IF_EnableLatch.setIF_enable(false);
+			}
+			else {
+				//TODO
+				// if instruction being processed is an end instruction, remember to call Simulator.setSimulationComplete(true);
+				int result;
+				if (controlunit.opcode.equals("10110")){
+					result = MA_RW_Latch.getldres();
+				}
+				else{
+					result = MA_RW_Latch.getalures();
+				}
+				int rd = MA_RW_Latch.getrd();
+				System.out.println("rd = "+ rd+"\n");
+				System.out.println("result = "+ result+"\n");
+	
+				if(controlunit.isWb()){
+					containingProcessor.getRegisterFile().setValue(rd, result);
+				}
+				
+				MA_RW_Latch.setRW_enable(false);
+				IF_EnableLatch.setIF_enable(true);
+				/*
+				if(containingProcessor.getcontrol_unit().isend()){
+					Simulator.setSimulationComplete(true);
+					IF_EnableLatch.setIF_enable(false);
+				}*/
 			}
 
 		}

@@ -7,15 +7,16 @@ public class OperandFetch {
 	IF_OF_LatchType IF_OF_Latch;
 	OF_EX_LatchType OF_EX_Latch;
 	co_unit controlunit = new co_unit();
+	boolean is_end = false;
 	public boolean r3(String op) {
-		if(op.equals("")||op.length()>5) return false;
+		if(op.equals("")) return false;
 		if(op.charAt(4)=='0' && !(op.charAt(0)=='1' && op.charAt(1)=='1') && !op.equals("10110"))
 			return true;
 		else return false;
 		
 	}
 	public boolean r2i(String op) {
-		if(op.equals("")||op.length()>5) return false;
+		if(op.equals("")) return false;
 		if( ((op.charAt(4)=='1') || op.equals("10110") || op.equals("11010") ||op.equals("11100") ) && !op.equals("11101"))
 			return true;
 		else return false;
@@ -23,7 +24,7 @@ public class OperandFetch {
 	}
 	
 	public boolean r2i1(String op) {
-		if(op.equals("")||op.length()>5) return false;
+		if(op.equals("")) return false;
 		if(op.charAt(4)=='1'  && !(op.charAt(0)=='1' && op.charAt(1)=='1') && !op.equals("10111"))
 			return true;
 		else return false;
@@ -31,7 +32,7 @@ public class OperandFetch {
 	}
 	
 	public boolean r2i2(String op) {//load or store
-		if(op.equals("")||op.length()>5) return false;
+		if(op.equals("")) return false;
 		if((op.equals("10110") || op.equals("10111")))
 			return true;
 		else return false;
@@ -39,15 +40,15 @@ public class OperandFetch {
 	}
 	
 	public boolean r2i3(String op) { // branch
-		if(op.equals("")||op.length()>5) return false;
-		if((op.charAt(0)=='1' && op.charAt(1)=='1')&&!op.equals("11000")&&!op.equals("11100")  )
+		if(op.equals("")) return false;
+		if((op.charAt(0)=='1' && op.charAt(1)=='1')&&!op.equals("11000")&&!op.equals("11101")  )
 			return true;
 		else return false;
 		
 	}
 	
 	public boolean ri(String op) {
-		if(op.equals("")||op.length()>5) return false;
+		if(op.equals("")) return false;
 		if(op.equals("11101") || op.equals("11000"))
 			return true;
 		else return false;
@@ -74,7 +75,7 @@ public class OperandFetch {
 	
 	public void performOF()
 	{
-		if(IF_OF_Latch.isOF_enable())
+		if(IF_OF_Latch.isOF_enable() && !is_end)
 		{
 			//TODO
 			
@@ -89,6 +90,7 @@ public class OperandFetch {
 				todo = todo + "0" ;
 			}
 			instructionString = todo + instructionString;
+
 			System.out.println("OF:"+"\n");
 			System.out.print("Instruction code:"+instructionString+"\n");
 			System.out.print("Opcode:"+controlunit.opcode+"\n");
@@ -99,8 +101,15 @@ public class OperandFetch {
 			rs1 = instructionString.substring(5,10);
 			rs2 = instructionString.substring(10,15);
 			opcode=instructionString.substring(0,5);
+			
+			if (instructionString.substring(0,5).equals("11101")) {
+				System.out.println("pppppppppppppppppppppppppppp123");
+				is_end = true;
+			}
+			
 			if(r3(opcode)) {
 				rd=instructionString.substring(15,20);
+				immx=instructionString.substring(20,32);
 			}
 			if(r2i(opcode)) {
 				rd=instructionString.substring(10,15);
@@ -149,7 +158,7 @@ public class OperandFetch {
 					}
 					if(rs2.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA1***********");
 				}
 				if(r3(containingProcessor.getRWUnit().controlunit.opcode) || r2i1(containingProcessor.getRWUnit().controlunit.opcode)) {
 					if(rs1.equals(containingProcessor.getRWUnit().controlunit.rd)){
@@ -157,7 +166,7 @@ public class OperandFetch {
 					}
 					if(rs2.equals(containingProcessor.getRWUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********RW***********");
+					}System.out.println("*********RW1***********"+conflict);
 				}
 				if(containingProcessor.getEXUnit().controlunit.opcode.equals("10110")) {
 					if(rs1.equals(containingProcessor.getEXUnit().controlunit.rd)){
@@ -173,7 +182,7 @@ public class OperandFetch {
 					}
 					if(rs2.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA2***********");
 				}
 			}
 			
@@ -193,12 +202,12 @@ public class OperandFetch {
 				if(r3(containingProcessor.getMAUnit().controlunit.opcode) || r2i1(containingProcessor.getMAUnit().controlunit.opcode)) {
 					if(rs1.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA3***********");
 				}
 				if(r3(containingProcessor.getRWUnit().controlunit.opcode) || r2i1(containingProcessor.getRWUnit().controlunit.opcode)) {
 					if(rs1.equals(containingProcessor.getRWUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********RW***********");
+					}System.out.println("*********RW2***********");
 				}
 				if(containingProcessor.getEXUnit().controlunit.opcode.equals("10110")) {
 					System.out.println("^^^^^^^^^^^^^"+rs1);
@@ -211,11 +220,12 @@ public class OperandFetch {
 				if(containingProcessor.getMAUnit().controlunit.opcode.equals("10110")) {
 					if(rs1.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA4***********");
 				}
 			}
 			
 			if(r2i3(opcode)) {
+				System.out.println("BEHENCHODA");
 				if(containingProcessor.getEXUnit().controlunit.opcode.equals("00111") || containingProcessor.getEXUnit().controlunit.opcode.equals("00110")) {
 					if(rs1.equals("11111")){
 						conflict = true;
@@ -238,7 +248,7 @@ public class OperandFetch {
 					}
 					if(rd.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA5***********"+conflict);
 				}
 				if(r3(containingProcessor.getRWUnit().controlunit.opcode) || r2i1(containingProcessor.getRWUnit().controlunit.opcode)) {
 					if(rs1.equals(containingProcessor.getRWUnit().controlunit.rd)){
@@ -246,7 +256,7 @@ public class OperandFetch {
 					}
 					 if(rd.equals(containingProcessor.getRWUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********RW***********");
+					}System.out.println("*********RW3***********"+conflict);
 				}
 				if(containingProcessor.getEXUnit().controlunit.opcode.equals("10110")) {
 					if(rs1.equals(containingProcessor.getEXUnit().controlunit.rd)){
@@ -262,7 +272,7 @@ public class OperandFetch {
 					}
 					if(rd.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA6***********"+conflict);
 				}
 			}
 			
@@ -280,12 +290,12 @@ public class OperandFetch {
 				if(r3(containingProcessor.getMAUnit().controlunit.opcode) || r2i1(containingProcessor.getMAUnit().controlunit.opcode)) {
 					if(rs1.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA7***********");
 				}
 				if(r3(containingProcessor.getRWUnit().controlunit.opcode) || r2i1(containingProcessor.getRWUnit().controlunit.opcode)) {
 					if(rs1.equals(containingProcessor.getRWUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********RW***********");
+					}System.out.println("*********RW4***********");
 				}
 				if(containingProcessor.getEXUnit().controlunit.opcode.equals("10110")) {
 					if(rs1.equals(containingProcessor.getEXUnit().controlunit.rd)){
@@ -295,7 +305,7 @@ public class OperandFetch {
 				if(containingProcessor.getMAUnit().controlunit.opcode.equals("10110")) {
 					if(rs1.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA8***********");
 				}
 				if(containingProcessor.getEXUnit().controlunit.opcode.equals("10111")) {
 					if((Integer.parseInt(rs1,2) + convertbin(immx) )== 
@@ -309,7 +319,7 @@ public class OperandFetch {
 									Integer.parseInt((containingProcessor.getMAUnit().controlunit.rd),2) +
 									convertbin(containingProcessor.getMAUnit().controlunit.Imm) ) {
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA9***********");
 				}
 							
 			}
@@ -337,7 +347,7 @@ public class OperandFetch {
 					}
 					if(rd.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA10***********");
 				}
 				if(r3(containingProcessor.getRWUnit().controlunit.opcode) || r2i1(containingProcessor.getRWUnit().controlunit.opcode)) {
 					if(rs1.equals(containingProcessor.getRWUnit().controlunit.rd)){
@@ -345,7 +355,7 @@ public class OperandFetch {
 					}
 					if(rd.equals(containingProcessor.getRWUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********RW***********");
+					}System.out.println("*********RW5***********");
 				}
 				if(containingProcessor.getEXUnit().controlunit.opcode.equals("10110")) {
 					if(rs1.equals(containingProcessor.getEXUnit().controlunit.rd)){
@@ -361,7 +371,7 @@ public class OperandFetch {
 					}
 					if(rd.equals(containingProcessor.getMAUnit().controlunit.rd)){
 						conflict = true;
-					}System.out.println("*********MA***********");
+					}System.out.println("*********MA11***********");
 				}
 			}
 			//System.out.println("MAA ka loda"+conflict);
@@ -370,16 +380,17 @@ public class OperandFetch {
 				System.out.println("MAA ka loda      instruction set");
 				OF_EX_Latch.setimmx(convertbin(immx));
 				OF_EX_Latch.setbranchtarget(convertbin(immx) + containingProcessor.getRegisterFile().getProgramCounter()-1);
-				containingProcessor.getcontrol_unit().setopcode(instructionString.substring(0,5));
+				//containingProcessor.getcontrol_unit().setopcode(instructionString.substring(0,5));
 				OF_EX_Latch.setoperand1(operand1);
 				OF_EX_Latch.setoperand2(operand2);
 				OF_EX_Latch.setrd(Integer.parseInt(rd,2));
-				containingProcessor.getIFUnit().conflict = true ;
+				containingProcessor.getIFUnit().conflict = false ;
 				IF_OF_Latch.setOF_enable(false);
 				OF_EX_Latch.setEX_enable(true);
 			}
 			else {
-				containingProcessor.getIFUnit().conflict = false ;
+				containingProcessor.getIFUnit().conflict = true ;
+				System.out.println("))))))))))))))))))))))))))))))");
 			}
 			/*System.out.print("Branch target:"+Integer.toString(convertbin(immx)+ containingProcessor.getRegisterFile().getProgramCounter()-1));
 			System.out.println("reg1:"+rs1);

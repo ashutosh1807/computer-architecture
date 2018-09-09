@@ -9,6 +9,7 @@ public class Execute {
 	EX_IF_LatchType EX_IF_Latch;
 	ALU alu=new ALU();
 	co_unit controlunit = new co_unit();
+	boolean is_end = false;
 	public Execute(Processor containingProcessor, OF_EX_LatchType oF_EX_Latch, EX_MA_LatchType eX_MA_Latch, EX_IF_LatchType eX_IF_Latch)
 	{
 		this.containingProcessor = containingProcessor;
@@ -19,7 +20,7 @@ public class Execute {
 	
 	public void performEX()
 	{
-		if(OF_EX_Latch.isEX_enable()){
+		if(OF_EX_Latch.isEX_enable() && !is_end){
 			System.out.println("EX:"+"\n");
 			int isbranchtaken =0,branchPC=0;
 			
@@ -35,12 +36,12 @@ public class Execute {
 			int op1 = OF_EX_Latch.getoperand1() ;
 			int op2 =  OF_EX_Latch.getoperand2();
 
-			String opcode=containingProcessor.getcontrol_unit().opcode;
+			String opcode=controlunit.opcode;
 			int imm =	OF_EX_Latch.getimmx();
 			System.out.println("OPCODE:"+opcode+"\n");
 
 			int alures=0;
-			if(containingProcessor.getcontrol_unit().isimm() || opcode.equals("11101")){
+			if(controlunit.isimm() || opcode.equals("11101")){
 				alu.setop1(op1);
 				alu.setop2(imm);
 				alures=alu.eval(opcode);
@@ -64,8 +65,9 @@ public class Execute {
 
 			}
 			else{
-				
-				switch(containingProcessor.getcontrol_unit().getopcode()){
+				System.out.println("----------------------------"+op1);
+				System.out.println("----------------------------"+op2);
+				switch(controlunit.opcode){
 					case "11000":{
 						isbranchtaken= 1;
 						branchPC = OF_EX_Latch.getbranchtarget();
@@ -74,7 +76,8 @@ public class Execute {
 					case "11001":{
 						
 						if(op1 == op2){
-							
+							System.out.println("----------------------------"+op1);
+							System.out.println("----------------------------"+op2);
 							isbranchtaken=1;
 							branchPC = OF_EX_Latch.getbranchtarget();
 						}
@@ -101,6 +104,10 @@ public class Execute {
 						}
 						break;
 					}
+					case "11101":{
+						is_end = true;
+						EX_MA_Latch.setMA_enable(true);
+					}
 				}
 				//default: Misc.printErrorAndExit("unknown instruction!!");
 				
@@ -114,12 +121,16 @@ public class Execute {
 				EX_IF_Latch.setisbranchtaken();
 				EX_IF_Latch.setbranchtarget(branchPC);
 				EX_IF_Latch.setIF_enable(true);
+				containingProcessor.getOFUnit().IF_OF_Latch.OF_enable=false;
+				containingProcessor.getOFUnit().is_end = false;
+				containingProcessor.getIFUnit().IF_EnableLatch.IF_enable = false;
+				containingProcessor.getIFUnit().is_end = false;
 			}
 			else {
-				OF_EX_Latch.setEX_enable(false);
+				
 				EX_MA_Latch.setrd(OF_EX_Latch.getrd());
 			}
-
+			OF_EX_Latch.setEX_enable(false);
 		}
 		else {
 			controlunit.opcode="";

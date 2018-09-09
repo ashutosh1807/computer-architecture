@@ -4,14 +4,14 @@ public class co_unit {
 	int instruction;
 	String opcode="",rs1="",rs2="",rd="",Imm = "";
 	public boolean r3(String op) {
-		if(op.equals("")||op.length()>5) return false;
+		if(op.equals("")) return false;
 		if(op.charAt(4)=='0' && !(op.charAt(0)=='1' && op.charAt(1)=='1') && !op.equals("10110"))
 			return true;
 		else return false;
 		
 	}
 	public boolean r2i(String op) {
-		if(op.equals("")||op.length()>5) return false;
+		if(op.equals("")) return false;
 		if( ((op.charAt(4)=='1') || op.equals("10110") || op.equals("11010") ||op.equals("11100") ) && !op.equals("11101"))
 			return true;
 		else return false;
@@ -19,7 +19,7 @@ public class co_unit {
 	}
 	
 	public boolean ri(String op) {
-		if(op.equals("")||op.length()>5) return false;
+		if(op.equals("")) return false;
 		if(op.equals("11101") || op.equals("11000"))
 			return true;
 		else return false;
@@ -49,5 +49,26 @@ public class co_unit {
 			Imm=instructionString.substring(10,32);
 		}
 	} 
+	public boolean isWb(){
+		if ((opcode.charAt(0) == '1' && opcode.charAt(1) =='1') || (opcode.equals("10111"))){
+			return false;
+		}
+			return true;
+	}
+	public boolean isimm(){
+		//System.out.println(opcode.equals("10110"));
+
+		if (( opcode.charAt(4)=='1'|| opcode.equals("10110")) && !( opcode.equals("11101") || opcode.equals("11001") || opcode.equals("11011"))){
+
+			return true;
+		}
+		else return false ;
+	}
+	public boolean isSt(){
+		if(opcode.equals("10111")){
+				return true;
+		}
+		else return false ;
+	}
 
 }
